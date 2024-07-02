@@ -4,7 +4,6 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb/hooks',
-    "react-compiler",
     'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
@@ -17,7 +16,7 @@ module.exports = {
     project: ['./tsconfig.json', './tsconfig.node.json'],
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', 'prettier'],
+  plugins: ['react-refresh', 'prettier', 'react-compiler'],
   rules: {
     'prettier/prettier': [
       'error',
@@ -25,12 +24,12 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
-    "react-compiler/react-compiler": "error",
     '@typescript-eslint/no-explicit-any': 'error',
     'react/react-in-jsx-scope': 0,
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
+    "react-compiler/react-compiler": "error",
   },
 }
