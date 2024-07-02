@@ -4,11 +4,11 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb/hooks',
+    "react-compiler",
     'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
-
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: {
@@ -25,6 +25,9 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    "react-compiler/react-compiler": "error",
+    '@typescript-eslint/no-explicit-any': 'error',
+    'react/react-in-jsx-scope': 0,
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
