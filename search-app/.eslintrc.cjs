@@ -31,5 +31,6 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "react-compiler/react-compiler": "error",
+    "react/prefer-stateless-function": 0,
   },
 }

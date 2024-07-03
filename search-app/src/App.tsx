@@ -1,13 +1,8 @@
 import './App.css';
+import SearchPage from './view/search-page';
 
 function App() {
-  return (
-    <div>
-      <p>Hello react!</p>
-
-      <p>Hello boss!</p>
-    </div>
-  );
+  return <SearchPage />;
 }
 
 export default App;
