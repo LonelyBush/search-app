@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import SearchItem from '../components/search_item/search_item';
+import ItemsList from '../components/items_list/items_list';
 
 class SearchPage extends Component {
   render() {
@@ -7,7 +7,7 @@ class SearchPage extends Component {
       <div>
         <input type="text" />
         <button type="button">Submit</button>
-        <SearchItem />
+        <ItemsList />
       </div>
     );
   }

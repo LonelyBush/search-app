@@ -1,20 +1,50 @@
 import { Component } from 'react';
 import './search_item_style.css';
-import hpIcon from '../../../assets/icon/heart-icon.svg';
-import defIcon from '../../../assets/icon/shield-icon.svg';
-import atackIcon from '../../../assets/icon/sword-icon.svg';
-import speedIcon from '../../../assets/icon/wing-icon.svg';
+import { getPokes } from '../../api/getAllPokes';
+import StatsContainer from '../stats_container/stats_container';
+import { PokeData } from '../../interfaces/api_interfaces';
+import { SearchItemProps } from '../../interfaces/props_interfaces';
 
-class SearchItem extends Component {
+interface State extends PokeData {}
+
+class SearchItem extends Component<SearchItemProps, State> {
+  constructor(props: SearchItemProps) {
+    super(props);
+    this.state = {
+      species: {
+        name: '',
+        url: '',
+      },
+      stats: [],
+      sprites: {
+        other: {
+          'official-artwork': {
+            front_default: '',
+          },
+        },
+      },
+    };
+  }
+
+  async componentDidMount() {
+    const { url } = this.props;
+    const data = await getPokes(url);
+    this.setState({ ...data });
+    console.log(this.state);
+  }
+
   render() {
+    const { name } = this.props;
+    const { sprites, stats } = this.state;
+    console.log(this.state);
     return (
       <div className="item-container">
         <img
           alt="pokemon-pic"
-          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
+          src={sprites.other['official-artwork'].front_default}
         />
         <div className="name-type-container">
-          <h3>Pikachu</h3>
+          <h3>{name.charAt(0).toUpperCase() + name.slice(1)}u</h3>
           <div className="pokemon-type">
             <p>Type:</p>
             <span>&#9889;</span>
@@ -27,25 +57,7 @@ class SearchItem extends Component {
           forest-dweller roasts tough berries with an electric shock before
           consuming them.
         </div>
-
-        <div className="stats-container">
-          <div className="stat-block">
-            <img className="stat-icon" src={hpIcon} alt="stat-icon" />
-            <div>45</div>
-          </div>
-          <div className="stat-block">
-            <img className="stat-icon" src={defIcon} alt="stat-icon" />
-            <div>50</div>
-          </div>
-          <div className="stat-block">
-            <img className="stat-icon" src={atackIcon} alt="stat-icon" />
-            <div>30</div>
-          </div>
-          <div className="stat-block">
-            <img className="stat-icon" src={speedIcon} alt="stat-icon" />
-            <div>70</div>
-          </div>
-        </div>
+        <StatsContainer stats={stats} />
       </div>
     );
   }
