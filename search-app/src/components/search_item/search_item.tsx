@@ -5,6 +5,7 @@ import PokemonStats from '../pokemon_stats/pokemon_stats';
 import { PokeData } from '../../interfaces/api_interfaces';
 import { SearchItemProps } from '../../interfaces/props_interfaces';
 import PokemonTypes from '../pokemon_types/pokemon_types';
+import PokemonFlavorText from '../pokemon_flavor-text/pokemon_flavor-text';
 
 interface State extends PokeData {}
 
@@ -13,10 +14,6 @@ class SearchItem extends Component<SearchItemProps, State> {
     super(props);
     this.state = {
       types: [],
-      species: {
-        name: '',
-        url: '',
-      },
       stats: [],
       sprites: {
         other: {
@@ -32,13 +29,11 @@ class SearchItem extends Component<SearchItemProps, State> {
     const { url } = this.props;
     const data = await getPokes(url);
     this.setState({ ...data });
-    console.log(this.state);
   }
 
   render() {
     const { name } = this.props;
     const { sprites, stats, types } = this.state;
-    console.log(this.state);
     return (
       <div className="item-container">
         <img
@@ -49,12 +44,7 @@ class SearchItem extends Component<SearchItemProps, State> {
           <h3>{name.charAt(0).toUpperCase() + name.slice(1)}u</h3>
           <PokemonTypes types={types} />
         </div>
-
-        <div className="flavor-text">
-          Possesses cheek sacs in which it stores electricity. This clever
-          forest-dweller roasts tough berries with an electric shock before
-          consuming them.
-        </div>
+        <PokemonFlavorText name={name} />
         <PokemonStats stats={stats} />
       </div>
     );

@@ -32,5 +32,6 @@ module.exports = {
     ],
     "react-compiler/react-compiler": "error",
     "react/prefer-stateless-function": 0,
+    "@typescript-eslint/naming-convention": 0,
   },
 }

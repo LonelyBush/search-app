@@ -12,3 +12,7 @@ export interface StatsContainerProps {
 export interface PokemonTypesProps {
   types: PokeType[];
 }
+
+export interface PokemonFlavorProps {
+  name: string;
+}

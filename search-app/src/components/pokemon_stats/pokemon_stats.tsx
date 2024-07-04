@@ -17,7 +17,7 @@ class PokemonStats extends Component<StatsContainerProps> {
       <div className="stats-container">
         {getOnlyMainStats.map((elem) => {
           return (
-            <div className="stat-block">
+            <div key={elem.stat.name} className="stat-block">
               <img
                 className="stat-icon"
                 src={iconCollection[elem.stat.name]}

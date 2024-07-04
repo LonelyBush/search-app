@@ -21,10 +21,6 @@ export interface PokeType {
 }
 
 export interface PokeData {
-  species: {
-    name: string;
-    url: string;
-  };
   types: PokeType[];
   stats: PokeStats[];
   sprites: {
@@ -34,4 +30,15 @@ export interface PokeData {
       };
     };
   };
+}
+
+export interface PokeFlavor {
+  language: {
+    name: string;
+  };
+  flavor_text: string;
+}
+
+export interface PokeSpecies {
+  flavor_text_entries: PokeFlavor[];
 }
