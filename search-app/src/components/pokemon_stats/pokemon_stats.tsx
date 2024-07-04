@@ -2,9 +2,9 @@ import { Component } from 'react';
 
 import { StatsContainerProps } from '../../interfaces/props_interfaces';
 import { iconCollection } from './icon_collection-const';
-import './stats_container_style.css';
+import './pokemon_stats_style.css';
 
-class StatsContainer extends Component<StatsContainerProps> {
+class PokemonStats extends Component<StatsContainerProps> {
   render() {
     const { stats } = this.props;
     const getOnlyMainStats = stats.filter((elem) => {
@@ -32,4 +32,4 @@ class StatsContainer extends Component<StatsContainerProps> {
   }
 }
 
-export default StatsContainer;
+export default PokemonStats;

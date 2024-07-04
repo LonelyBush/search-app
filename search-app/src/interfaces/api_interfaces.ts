@@ -14,12 +14,18 @@ export interface PokeStats {
   };
 }
 
+export interface PokeType {
+  type: {
+    name: string;
+  };
+}
+
 export interface PokeData {
   species: {
     name: string;
     url: string;
   };
-
+  types: PokeType[];
   stats: PokeStats[];
   sprites: {
     other: {

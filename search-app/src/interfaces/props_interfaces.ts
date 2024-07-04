@@ -1,4 +1,4 @@
-import { PokeStats } from './api_interfaces';
+import { PokeStats, PokeType } from './api_interfaces';
 
 export interface SearchItemProps {
   name: string;
@@ -7,4 +7,8 @@ export interface SearchItemProps {
 
 export interface StatsContainerProps {
   stats: PokeStats[];
+}
+
+export interface PokemonTypesProps {
+  types: PokeType[];
 }
