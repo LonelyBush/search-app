@@ -48,30 +48,8 @@
     margin-right: 5px;
     margin-left: 3px;
 }
-
-.stats-container{
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
-}
-
 .flavor-text{
     display: flex;
     line-height: 1.4rem;
     margin-bottom: 1.4rem;
 }
-
-.stat-icon{
-    width: 1.6rem;
-    aspect-ratio: 1;
-}
-
-.stat-block{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.45rem;
-}
-

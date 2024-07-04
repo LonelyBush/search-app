@@ -2,6 +2,7 @@ import { Component } from 'react';
 
 import { StatsContainerProps } from '../../interfaces/props_interfaces';
 import { iconCollection } from './icon_collection-const';
+import './stats_container_style.css';
 
 class StatsContainer extends Component<StatsContainerProps> {
   render() {
