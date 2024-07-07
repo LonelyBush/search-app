@@ -8,6 +8,7 @@ export interface PokeSearchValue {
 }
 
 export interface PokeCall {
+  loading: boolean;
   results: PokeResult[];
 }
 
