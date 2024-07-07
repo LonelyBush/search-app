@@ -3,6 +3,10 @@ export interface PokeResult {
   url: string;
 }
 
+export interface PokeSearchValue {
+  searchValue: string;
+}
+
 export interface PokeCall {
   results: PokeResult[];
 }
@@ -20,9 +24,19 @@ export interface PokeType {
   };
 }
 
+export interface PokeFlavor {
+  language: {
+    name: string;
+  };
+  flavor_text: string;
+}
+
 export interface PokeData {
   types: PokeType[];
   stats: PokeStats[];
+  species: {
+    url: string;
+  };
   sprites: {
     other: {
       'official-artwork': {
@@ -30,13 +44,6 @@ export interface PokeData {
       };
     };
   };
-}
-
-export interface PokeFlavor {
-  language: {
-    name: string;
-  };
-  flavor_text: string;
 }
 
 export interface PokeSpecies {

@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import { getPokes } from '../../api/getAllPokes';
 import { PokemonFlavorProps } from '../../interfaces/props_interfaces';
 import { PokeSpecies } from '../../interfaces/api_interfaces';
+import { getPokes } from '../../api/getAllPokes';
 
 interface State extends PokeSpecies {}
 
@@ -14,10 +14,8 @@ class PokemonFlavorText extends Component<PokemonFlavorProps, State> {
   }
 
   async componentDidMount() {
-    const { name } = this.props;
-    const data = await getPokes(
-      `https://pokeapi.co/api/v2/pokemon-species/${name}`,
-    );
+    const { url } = this.props;
+    const data = await getPokes(`${url}`);
     this.setState({ ...data });
   }
 
@@ -29,7 +27,7 @@ class PokemonFlavorText extends Component<PokemonFlavorProps, State> {
     return (
       <div className="flavor-text">
         {firstEn !== undefined
-          ? firstEn.flavor_text.replace('\f', '')
+          ? firstEn.flavor_text.replace('\f', ' ')
           : 'Sorry :c No text provided'}
       </div>
     );

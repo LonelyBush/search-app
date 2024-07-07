@@ -1,4 +1,9 @@
+import { FormEvent } from 'react';
 import { PokeStats, PokeType } from './api_interfaces';
+
+export interface ItemsListProps {
+  searchValue: string;
+}
 
 export interface SearchItemProps {
   name: string;
@@ -14,5 +19,9 @@ export interface PokemonTypesProps {
 }
 
 export interface PokemonFlavorProps {
-  name: string;
+  url: string;
+}
+
+export interface SearchBarProps {
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }

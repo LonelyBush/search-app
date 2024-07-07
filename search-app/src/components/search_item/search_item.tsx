@@ -15,6 +15,9 @@ class SearchItem extends Component<SearchItemProps, State> {
     this.state = {
       types: [],
       stats: [],
+      species: {
+        url: '',
+      },
       sprites: {
         other: {
           'official-artwork': {
@@ -25,15 +28,19 @@ class SearchItem extends Component<SearchItemProps, State> {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.callForPoke();
+  }
+
+  callForPoke = async () => {
     const { url } = this.props;
     const data = await getPokes(url);
     this.setState({ ...data });
-  }
+  };
 
   render() {
     const { name } = this.props;
-    const { sprites, stats, types } = this.state;
+    const { sprites, stats, types, species } = this.state;
     return (
       <div className="item-container">
         <img
@@ -41,10 +48,14 @@ class SearchItem extends Component<SearchItemProps, State> {
           src={sprites.other['official-artwork'].front_default}
         />
         <div className="name-type-container">
-          <h3>{name.charAt(0).toUpperCase() + name.slice(1)}u</h3>
+          <h3>{name.charAt(0).toUpperCase() + name.slice(1)}</h3>
           <PokemonTypes types={types} />
         </div>
-        <PokemonFlavorText name={name} />
+        {species.url === '' ? (
+          <div>Loading...</div>
+        ) : (
+          <PokemonFlavorText url={species.url} />
+        )}
         <PokemonStats stats={stats} />
       </div>
     );
