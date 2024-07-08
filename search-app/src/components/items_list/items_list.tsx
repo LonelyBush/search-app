@@ -46,25 +46,26 @@ class ItemsList extends Component<ItemsListProps, State> {
   }
 
   setupConnection() {
-    this.setState({ loading: true });
+    const getQueryFromLS = localStorage.getItem('search-value');
+    if(getQueryFromLS !== null){
+      this.getSearchQueryData(getQueryFromLS)
+    }else {   this.setState({ loading: true });
     getPokes('https://pokeapi.co/api/v2/pokemon/').then((data) => {
       this.setState({ loading: false });
       this.setState({ ...data });
     });
   }
+  }
 
   render() {
     const { results, loading } = this.state;
-    let itemListComponent
-    if(results.length === 0){
-      itemListComponent = <EmptySearchResult />
+    let itemListComponent;
+    if (results.length === 0) {
+      itemListComponent = <EmptySearchResult />;
     } else {
-      itemListComponent = 
-        results.map((elem) => {
-          return (
-            <SearchItem key={elem.url} name={elem.name} url={elem.url} />
-          );
-        })
+      itemListComponent = results.map((elem) => {
+        return <SearchItem key={elem.url} name={elem.name} url={elem.url} />;
+      });
     }
 
     return (
