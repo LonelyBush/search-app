@@ -1,4 +1,4 @@
-import React, { Component, FormEvent, PropsWithChildren } from 'react';
+import { Component, FormEvent, PropsWithChildren } from 'react';
 import ItemsList from '../components/items_list/items_list';
 import './search-page-style.css';
 import { PokeSearchValue } from '../interfaces/api_interfaces';
@@ -6,7 +6,7 @@ import SearchBar from '../components/search_bar/search_bar';
 
 interface State extends PokeSearchValue {}
 
-const searchValFromLS = localStorage.getItem('search-value')
+const searchValFromLS = localStorage.getItem('search-value');
 
 class SearchPage extends Component<PropsWithChildren, State> {
   constructor(props: PropsWithChildren) {
@@ -27,7 +27,10 @@ class SearchPage extends Component<PropsWithChildren, State> {
     return (
       <div className="main-content-section">
         <h2>Poke Search</h2>
-        <SearchBar searchValue={searchValFromLS} handleSubmit={this.handleSubmit} />
+        <SearchBar
+          searchValue={searchValFromLS}
+          handleSubmit={this.handleSubmit}
+        />
         <ItemsList searchValue={searchValue} />
       </div>
     );

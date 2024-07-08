@@ -30,16 +30,13 @@ class ItemsList extends Component<ItemsListProps, State> {
     localStorage.setItem('search-value', searchValue);
     this.setState({ loading: true });
     const changedQuery = searchValue.trim().toLowerCase();
-    console.log(changedQuery);
     getPokes('https://pokeapi.co/api/v2/pokemon?limit=1302&offset=0').then(
       (data) => {
         this.setState({ loading: false });
         const getResults = data.results;
-        console.log(getResults);
         const filterResults = getResults.filter((elem: PokeResult) =>
           elem.name.includes(changedQuery),
         );
-        console.log(getResults, filterResults);
         this.setState({ results: filterResults });
       },
     );
@@ -47,14 +44,15 @@ class ItemsList extends Component<ItemsListProps, State> {
 
   setupConnection() {
     const getQueryFromLS = localStorage.getItem('search-value');
-    if(getQueryFromLS !== null){
-      this.getSearchQueryData(getQueryFromLS)
-    }else {   this.setState({ loading: true });
-    getPokes('https://pokeapi.co/api/v2/pokemon/').then((data) => {
-      this.setState({ loading: false });
-      this.setState({ ...data });
-    });
-  }
+    if (getQueryFromLS !== null) {
+      this.getSearchQueryData(getQueryFromLS);
+    } else {
+      this.setState({ loading: true });
+      getPokes('https://pokeapi.co/api/v2/pokemon/').then((data) => {
+        this.setState({ loading: false });
+        this.setState({ ...data });
+      });
+    }
   }
 
   render() {
@@ -70,10 +68,7 @@ class ItemsList extends Component<ItemsListProps, State> {
 
     return (
       <div className="items-list-container">
-        {loading ? (
-          <LoadingSpinner />
-        ) : itemListComponent
-        }
+        {loading ? <LoadingSpinner /> : itemListComponent}
       </div>
     );
   }
