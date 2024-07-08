@@ -48,10 +48,12 @@ class ItemsList extends Component<ItemsListProps, State> {
       this.getSearchQueryData(getQueryFromLS);
     } else {
       this.setState({ loading: true });
-      getPokes('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0').then((data) => {
-        this.setState({ loading: false });
-        this.setState({ ...data });
-      });
+      getPokes('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0').then(
+        (data) => {
+          this.setState({ loading: false });
+          this.setState({ ...data });
+        },
+      );
     }
   }
 
