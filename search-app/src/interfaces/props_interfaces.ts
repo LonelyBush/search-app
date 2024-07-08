@@ -26,3 +26,7 @@ export interface SearchBarProps {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   searchValue: string | null;
 }
+
+export interface SearchBarState {
+  focus: boolean;
+}

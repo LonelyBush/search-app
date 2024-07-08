@@ -47,7 +47,7 @@ input[type="text"]:focus {
     display: none;
 }
 
-.input-container input:invalid ~ span{
+.input-container input:invalid[data-focused="true"] ~ span{
     display: block;
 }
 

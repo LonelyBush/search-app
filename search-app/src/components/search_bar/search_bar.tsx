@@ -1,15 +1,29 @@
 import { Component } from 'react';
-import { SearchBarProps } from '../../interfaces/props_interfaces';
+import {
+  SearchBarProps,
+  SearchBarState,
+} from '../../interfaces/props_interfaces';
 import './search_bar-style.css';
 
-class SearchBar extends Component<SearchBarProps> {
+interface State extends SearchBarState {}
+class SearchBar extends Component<SearchBarProps, State> {
+  constructor(props: SearchBarProps) {
+    super(props);
+    this.state = {
+      focus: false,
+    };
+  }
+
   render() {
     const { handleSubmit, searchValue } = this.props;
+    const { focus } = this.state;
     return (
       <div className="search-bar-container">
         <form className="search-form" onSubmit={handleSubmit}>
           <div className="input-container">
             <input
+              onFocus={() => this.setState({ focus: true })}
+              data-focused={focus.toString()}
               defaultValue={searchValue === null ? '' : searchValue}
               name="search-input"
               required
