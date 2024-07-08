@@ -5,6 +5,7 @@ import { ItemsListProps } from '../../interfaces/props_interfaces';
 import { getPokes } from '../../api/getAllPokes';
 import { PokeCall, PokeResult } from '../../interfaces/api_interfaces';
 import LoadingSpinner from '../loading_spinner/loading_spinner';
+import EmptySearchResult from '../empry-search-result/empty-search-result';
 
 interface State extends PokeCall {}
 
@@ -26,14 +27,19 @@ class ItemsList extends Component<ItemsListProps, State> {
   }
 
   getSearchQueryData(searchValue: string) {
+    localStorage.setItem('search-value', searchValue);
     this.setState({ loading: true });
-    getPokes('https://pokeapi.co/api/v2/pokemon?limit=20&offset=20').then(
+    const changedQuery = searchValue.trim().toLowerCase();
+    console.log(changedQuery);
+    getPokes('https://pokeapi.co/api/v2/pokemon?limit=1302&offset=0').then(
       (data) => {
         this.setState({ loading: false });
         const getResults = data.results;
+        console.log(getResults);
         const filterResults = getResults.filter((elem: PokeResult) =>
-          elem.name.includes(searchValue),
+          elem.name.includes(changedQuery),
         );
+        console.log(getResults, filterResults);
         this.setState({ results: filterResults });
       },
     );
@@ -49,17 +55,24 @@ class ItemsList extends Component<ItemsListProps, State> {
 
   render() {
     const { results, loading } = this.state;
+    let itemListComponent
+    if(results.length === 0){
+      itemListComponent = <EmptySearchResult />
+    } else {
+      itemListComponent = 
+        results.map((elem) => {
+          return (
+            <SearchItem key={elem.url} name={elem.name} url={elem.url} />
+          );
+        })
+    }
+
     return (
       <div className="items-list-container">
         {loading ? (
           <LoadingSpinner />
-        ) : (
-          results.map((elem) => {
-            return (
-              <SearchItem key={elem.url} name={elem.name} url={elem.url} />
-            );
-          })
-        )}
+        ) : itemListComponent
+        }
       </div>
     );
   }

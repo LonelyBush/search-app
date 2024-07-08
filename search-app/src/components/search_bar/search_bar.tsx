@@ -7,7 +7,7 @@ class SearchBar extends Component<SearchBarProps> {
     return (
       <div className="search-bar-container">
         <form onSubmit={handleSubmit}>
-          <input name="search-input" type="text" />
+          <input name="search-input" required type="text" />
           <button type="submit">Submit</button>
         </form>
       </div>
