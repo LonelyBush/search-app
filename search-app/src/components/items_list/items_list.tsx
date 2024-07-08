@@ -30,7 +30,7 @@ class ItemsList extends Component<ItemsListProps, State> {
     localStorage.setItem('search-value', searchValue);
     this.setState({ loading: true });
     const changedQuery = searchValue.trim().toLowerCase();
-    getPokes('https://pokeapi.co/api/v2/pokemon?limit=1302&offset=0').then(
+    getPokes('https://pokeapi.co/api/v2/pokemon?limit=120&offset=0').then(
       (data) => {
         this.setState({ loading: false });
         const getResults = data.results;
@@ -48,7 +48,7 @@ class ItemsList extends Component<ItemsListProps, State> {
       this.getSearchQueryData(getQueryFromLS);
     } else {
       this.setState({ loading: true });
-      getPokes('https://pokeapi.co/api/v2/pokemon/').then((data) => {
+      getPokes('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0').then((data) => {
         this.setState({ loading: false });
         this.setState({ ...data });
       });
