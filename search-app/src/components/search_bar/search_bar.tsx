@@ -15,7 +15,7 @@ class SearchBar extends Component<SearchBarProps, State> {
   }
 
   render() {
-    const { handleSubmit, searchValue } = this.props;
+    const { handleSubmit, searchValue, triggerError } = this.props;
     const { focus } = this.state;
     return (
       <div className="search-bar-container">
@@ -36,6 +36,9 @@ class SearchBar extends Component<SearchBarProps, State> {
           </div>
           <button className="submit-btn" type="submit">
             Search em All!
+          </button>
+          <button onClick={triggerError} className="submit-btn" type="button">
+            Error
           </button>
         </form>
       </div>

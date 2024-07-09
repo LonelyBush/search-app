@@ -42,18 +42,17 @@ class ItemsList extends Component<ItemsListProps, State> {
     );
   }
 
-  setupConnection() {
+  async setupConnection() {
     const getQueryFromLS = localStorage.getItem('search-value');
     if (getQueryFromLS !== null) {
       this.getSearchQueryData(getQueryFromLS);
     } else {
       this.setState({ loading: true });
-      getPokes('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0').then(
-        (data) => {
-          this.setState({ loading: false });
-          this.setState({ ...data });
-        },
+      const data = await getPokes(
+        'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0',
       );
+      this.setState({ loading: false });
+      this.setState({ ...data });
     }
   }
 

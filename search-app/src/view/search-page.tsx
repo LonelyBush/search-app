@@ -11,7 +11,7 @@ const searchValFromLS = localStorage.getItem('search-value');
 class SearchPage extends Component<PropsWithChildren, State> {
   constructor(props: PropsWithChildren) {
     super(props);
-    this.state = { searchValue: '' };
+    this.state = { searchValue: '', hasError: false };
   }
 
   handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -23,13 +23,19 @@ class SearchPage extends Component<PropsWithChildren, State> {
   };
 
   render() {
-    const { searchValue } = this.state;
+    const { searchValue, hasError } = this.state;
+    if (hasError) {
+      throw new Error('Oh no, you clicked error button!');
+    }
     return (
       <div className="main-content-section">
         <h2>Poke Search</h2>
         <SearchBar
           searchValue={searchValFromLS}
           handleSubmit={this.handleSubmit}
+          triggerError={() => {
+            this.setState({ hasError: true });
+          }}
         />
         <ItemsList searchValue={searchValue} />
       </div>

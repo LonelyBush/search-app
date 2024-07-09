@@ -5,6 +5,7 @@ export interface PokeResult {
 
 export interface PokeSearchValue {
   searchValue: string;
+  hasError: boolean;
 }
 
 export interface PokeCall {
