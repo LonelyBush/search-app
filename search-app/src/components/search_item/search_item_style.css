@@ -1,0 +1,55 @@
+.item-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 18rem;
+    padding: 1rem;
+    box-shadow: 0 0.1rem 0.2rem #e1e1e1;
+    background-color: white;
+    border: 0.1rem solid #d5d5d5;
+    border-radius: 0.5rem;
+
+}
+
+.item-container > img {
+    display: flex;
+    align-self: center;
+    max-width: 13rem;
+    
+}
+
+.name-type-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.2rem;
+}
+
+.name-type-container > h3 {
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.pokemon-type{
+    display: flex;
+    align-items: center;
+}
+
+.pokemon-type > p:last-child {
+    margin: 0;
+    margin-top: 4px;
+}
+
+.pokemon-type > p:first-child{
+    margin: 0;
+}
+
+.pokemon-type > span{
+    margin-right: 5px;
+    margin-left: 3px;
+}
+.flavor-text{
+    display: flex;
+    line-height: 1.4rem;
+    margin-bottom: 1.4rem;
+}
