@@ -11,19 +11,19 @@ const searchValFromLS = localStorage.getItem('search-value');
 function SearchPage() {
   const [searchPageState, setSearchPageState] = useState<State>({
     searchValue: '',
-    hasError: false,
   });
+  const [hasError, setError] = useState<boolean>(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const searchValue = new FormData(e.currentTarget).get('search-input');
-    setSearchPageState({
-      searchValue: `${searchValue}`,
-      hasError: false,
-    });
+    setSearchPageState({ searchValue: `${searchValue}` });
   };
-  const { searchValue } = searchPageState;
 
+  const { searchValue } = searchPageState;
+  if (hasError) {
+    throw new Error('Oh, no error');
+  }
   return (
     <div className="main-content-section">
       <h2>Poke Search</h2>
@@ -31,7 +31,7 @@ function SearchPage() {
         searchValue={searchValFromLS}
         handleSubmit={handleSubmit}
         triggerError={() => {
-          setSearchPageState({ searchValue: '', hasError: true });
+          setError(true);
         }}
       />
       <ItemsList searchValue={searchValue} />
