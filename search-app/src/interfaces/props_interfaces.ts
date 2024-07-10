@@ -27,7 +27,3 @@ export interface SearchBarProps {
   searchValue: string | null;
   triggerError: () => void;
 }
-
-export interface SearchBarState {
-  focus: boolean;
-}
