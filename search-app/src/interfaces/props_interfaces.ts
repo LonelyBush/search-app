@@ -25,5 +25,4 @@ export interface PokemonFlavorProps {
 export interface SearchBarProps {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   searchValue: string | null;
-  triggerError: () => void;
 }

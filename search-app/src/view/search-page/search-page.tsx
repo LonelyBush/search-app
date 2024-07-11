@@ -1,8 +1,8 @@
 import { FormEvent, useState } from 'react';
-import ItemsList from '../components/items_list/items_list';
+import ItemsList from '../../components/items_list/items_list';
 import './search-page-style.css';
-import { PokeSearchValue } from '../interfaces/api_interfaces';
-import SearchBar from '../components/search_bar/search_bar';
+import { PokeSearchValue } from '../../interfaces/api_interfaces';
+import SearchBar from '../../components/search_bar/search_bar';
 
 interface State extends PokeSearchValue {}
 
@@ -12,7 +12,6 @@ function SearchPage() {
   const [searchPageState, setSearchPageState] = useState<State>({
     searchValue: '',
   });
-  const [hasError, setError] = useState<boolean>(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,19 +20,10 @@ function SearchPage() {
   };
 
   const { searchValue } = searchPageState;
-  if (hasError) {
-    throw new Error('Oh, no error');
-  }
   return (
     <div className="main-content-section">
       <h2>Poke Search</h2>
-      <SearchBar
-        searchValue={searchValFromLS}
-        handleSubmit={handleSubmit}
-        triggerError={() => {
-          setError(true);
-        }}
-      />
+      <SearchBar searchValue={searchValFromLS} handleSubmit={handleSubmit} />
       <ItemsList searchValue={searchValue} />
     </div>
   );

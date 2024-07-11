@@ -2,11 +2,7 @@ import { useState } from 'react';
 import { SearchBarProps } from '../../interfaces/props_interfaces';
 import './search_bar-style.css';
 
-function SearchBar({
-  handleSubmit,
-  searchValue,
-  triggerError,
-}: SearchBarProps) {
+function SearchBar({ handleSubmit, searchValue }: SearchBarProps) {
   const [focus, setFocus] = useState<boolean>(false);
 
   return (
@@ -28,9 +24,6 @@ function SearchBar({
         </div>
         <button className="submit-btn" type="submit">
           Search em All!
-        </button>
-        <button onClick={triggerError} className="submit-btn" type="button">
-          Error
         </button>
       </form>
     </div>
