@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import './items_list_style.css';
-import SearchItem from '../search_item/search_item';
 import { ItemsListProps } from '../../interfaces/props_interfaces';
 import { getPokes } from '../../api/getAllPokes';
 import { PokeCall, PokeResult } from '../../interfaces/api_interfaces';
 import LoadingSpinner from '../loading_spinner/loading_spinner';
 import EmptySearchResult from '../empry-search-result/empty-search-result';
 import Pagination from '../pagination/pagination-items-list';
+import SearchComponentRow from '../search-component-row/search-component-row';
 
 interface State extends PokeCall {}
 
@@ -18,8 +17,8 @@ function ItemsList({ searchValue }: ItemsListProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postPerPage] = useState<number>(20);
-  const { page } = useParams<{ page: string }>();
-  const navigate = useNavigate();
+  // const { page } = useParams<{ page: string }>();
+  // const navigate = useNavigate();
   const { results } = itemsListState;
   const indexOfLastPage = currentPage * postPerPage;
   const firstPostIndex = indexOfLastPage - postPerPage;
@@ -30,7 +29,9 @@ function ItemsList({ searchValue }: ItemsListProps) {
     itemListComponent = <EmptySearchResult />;
   } else {
     itemListComponent = currentPosts.map((elem) => {
-      return <SearchItem key={elem.url} name={elem.name} url={elem.url} />;
+      return (
+        <SearchComponentRow key={elem.url} name={elem.name} url={elem.url} />
+      );
     });
   }
 
@@ -68,28 +69,15 @@ function ItemsList({ searchValue }: ItemsListProps) {
     } else {
       setupConnection();
     }
-
-    if (page) {
-      setCurrentPage(parseInt(page, 10));
-    } else {
-      setCurrentPage(1);
-    }
-  }, [searchValue, page]);
+  }, [searchValue]);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    navigate(`${pageNumber}`);
   };
 
   return (
     <div className="items-list-container">
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <Routes>
-          <Route path=":page" element={itemListComponent} />
-        </Routes>
-      )}
+      {loading ? <LoadingSpinner /> : itemListComponent}
       <Pagination
         handlePageChange={handlePageChange}
         allResults={results.length}

@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import ItemsList from '../../components/items_list/items_list';
 import './search-page-style.css';
 import { PokeSearchValue } from '../../interfaces/api_interfaces';
@@ -22,9 +23,11 @@ function SearchPage() {
   const { searchValue } = searchPageState;
   return (
     <div className="main-content-section">
-      <h2>Poke Search</h2>
-      <SearchBar searchValue={searchValFromLS} handleSubmit={handleSubmit} />
-      <ItemsList searchValue={searchValue} />
+      <div className="side-bar-section">
+        <SearchBar searchValue={searchValFromLS} handleSubmit={handleSubmit} />
+        <ItemsList searchValue={searchValue} />
+      </div>
+      <Outlet />
     </div>
   );
 }

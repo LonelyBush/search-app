@@ -7,6 +7,7 @@ function SearchBar({ handleSubmit, searchValue }: SearchBarProps) {
 
   return (
     <div className="search-bar-container">
+      <h2>Poke Search</h2>
       <form className="search-form" onSubmit={handleSubmit}>
         <div className="input-container">
           <input
@@ -23,7 +24,7 @@ function SearchBar({ handleSubmit, searchValue }: SearchBarProps) {
           </span>
         </div>
         <button className="submit-btn" type="submit">
-          Search em All!
+          Search
         </button>
       </form>
     </div>

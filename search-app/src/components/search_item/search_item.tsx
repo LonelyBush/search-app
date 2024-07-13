@@ -1,37 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useLoaderData, useNavigation } from 'react-router-dom';
 import './search_item_style.css';
-import { getPokes } from '../../api/getAllPokes';
 import PokemonStats from '../pokemon_stats/pokemon_stats';
 import { PokeData } from '../../interfaces/api_interfaces';
-import { SearchItemProps } from '../../interfaces/props_interfaces';
 import PokemonTypes from '../pokemon_types/pokemon_types';
 import PokemonFlavorText from '../pokemon_flavor-text/pokemon_flavor-text';
+import LoadingSpinner from '../loading_spinner/loading_spinner';
 
-function SearchItem({ url, name }: SearchItemProps) {
-  const [data, setPokeData] = useState<PokeData>({
-    types: [],
-    stats: [],
-    species: {
-      url: '',
-    },
-    sprites: {
-      other: {
-        'official-artwork': {
-          front_default: '',
-        },
-      },
-    },
-  });
-  useEffect(() => {
-    const callForPoke = async () => {
-      const response = await getPokes(url);
-      setPokeData({ ...response });
-    };
-    callForPoke();
-  }, [url]);
-  const { sprites, stats, types, species } = data;
-  return (
-    <div className="item-container">
+function SearchItem() {
+  const navigation = useNavigation();
+  const data = useLoaderData() as PokeData;
+  const { sprites, stats, types, species, name } = data;
+  return navigation.state === 'loading' ? (
+    <LoadingSpinner />
+  ) : (
+    <div id="detail" className="item-container">
       <img
         alt="pokemon-pic"
         src={sprites.other['official-artwork'].front_default}

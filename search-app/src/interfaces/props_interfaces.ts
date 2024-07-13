@@ -5,11 +5,6 @@ export interface ItemsListProps {
   searchValue: string;
 }
 
-export interface SearchItemProps {
-  name: string;
-  url: string;
-}
-
 export interface StatsContainerProps {
   stats: PokeStats[];
 }
@@ -31,4 +26,9 @@ export interface PaginationProps {
   postPerPage: number;
   allResults: number;
   handlePageChange: (pageNumber: number) => void;
+}
+
+export interface SearchRowComponentProps {
+  name: string;
+  url: string;
 }

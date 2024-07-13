@@ -1,6 +1,9 @@
 .items-list-container{
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.4rem;
+    width: 26.2rem;
+    border: 0.1rem solid rgb(204, 201, 201);
+    background-color: #FFFFFF;
 }

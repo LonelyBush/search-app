@@ -44,6 +44,7 @@ export interface PokeData {
       };
     };
   };
+  name: string;
 }
 
 export interface PokeSpecies {
