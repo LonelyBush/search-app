@@ -5,7 +5,7 @@
   "homepage": "https://lonelybush.github.io/search-app",
   "type": "module",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest run",
     "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc -b && vite build",
