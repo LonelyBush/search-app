@@ -8,6 +8,7 @@ import LoadingSpinner from '../loading_spinner/loading_spinner';
 import EmptySearchResult from '../empry-search-result/empty-search-result';
 import Pagination from '../pagination/pagination-items-list';
 import SearchComponentRow from '../search-component-row/search-component-row';
+import useSearchQuery from '../../hooks/useSearchQuery-hook';
 
 interface State extends PokeCall {}
 
@@ -15,6 +16,7 @@ function ItemsList({ searchValue }: ItemsListProps) {
   const [itemsListState, setItemsListState] = useState<State>({
     results: [],
   });
+  const { searchQueryFromLS, setSearchQueryToLS } = useSearchQuery();
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postPerPage] = useState<number>(20);
@@ -38,7 +40,7 @@ function ItemsList({ searchValue }: ItemsListProps) {
 
   useEffect(() => {
     const getSearchQueryData = (searchQuery: string) => {
-      localStorage.setItem('search-value', searchQuery);
+      setSearchQueryToLS(searchQuery);
       setLoading(true);
       const changedQuery = searchQuery.trim().toLowerCase();
       getPokes('https://pokeapi.co/api/v2/pokemon?limit=300&offset=0').then(
@@ -53,9 +55,8 @@ function ItemsList({ searchValue }: ItemsListProps) {
       );
     };
     const setupConnection = async () => {
-      const getQueryFromLS = localStorage.getItem('search-value');
-      if (getQueryFromLS !== null) {
-        getSearchQueryData(getQueryFromLS);
+      if (searchQueryFromLS !== null) {
+        getSearchQueryData(searchQueryFromLS);
       } else {
         setLoading(true);
         const data = await getPokes(
@@ -80,7 +81,7 @@ function ItemsList({ searchValue }: ItemsListProps) {
     } else {
       setCurrentPage(1);
     }
-  }, [searchValue, pageNum, indexOfLastPage]);
+  }, [searchValue, pageNum, indexOfLastPage, searchQueryFromLS]);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);

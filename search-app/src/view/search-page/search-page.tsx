@@ -4,12 +4,12 @@ import ItemsList from '../../components/items_list/items_list';
 import './search-page-style.css';
 import { PokeSearchValue } from '../../interfaces/api_interfaces';
 import SearchBar from '../../components/search_bar/search_bar';
+import useSearchQuery from '../../hooks/useSearchQuery-hook';
 
 interface State extends PokeSearchValue {}
 
-const searchValFromLS = localStorage.getItem('search-value');
-
 function SearchPage() {
+  const { searchQueryFromLS } = useSearchQuery();
   const navigate = useNavigate();
   const { pageNum, pokeName } = useParams();
   const [searchPageState, setSearchPageState] = useState<State>({
@@ -20,7 +20,7 @@ function SearchPage() {
     e.preventDefault();
     const searchValue = new FormData(e.currentTarget).get('search-input');
     setSearchPageState({ searchValue: `${searchValue}` });
-    navigate('/1');
+    navigate('/search/1');
   };
 
   const { searchValue } = searchPageState;
@@ -32,7 +32,10 @@ function SearchPage() {
           if (pokeName) navigate(`/search/${pageNum}`);
         }}
       >
-        <SearchBar searchValue={searchValFromLS} handleSubmit={handleSubmit} />
+        <SearchBar
+          searchValue={searchQueryFromLS}
+          handleSubmit={handleSubmit}
+        />
         <ItemsList searchValue={searchValue} />
       </div>
       <Outlet />
