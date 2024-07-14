@@ -29,7 +29,7 @@ function SearchPage() {
       <div
         className="side-bar-section"
         onClick={() => {
-          if (pokeName) navigate(`/${pageNum}`);
+          if (pokeName) navigate(`/search/${pageNum}`);
         }}
       >
         <SearchBar searchValue={searchValFromLS} handleSubmit={handleSubmit} />

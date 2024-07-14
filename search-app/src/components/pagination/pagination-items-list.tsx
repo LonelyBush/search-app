@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { PaginationProps } from '../../interfaces/props_interfaces';
+import './pagination-items-style.css';
 
 function Pagination({
   allResults,
@@ -15,7 +16,10 @@ function Pagination({
       {pages.map((elem) => {
         return (
           <NavLink
-            to={`/${elem}`}
+            className={({ isActive }) =>
+              isActive ? 'pagination-button active' : 'pagination-button'
+            }
+            to={`/search/${elem}`}
             key={elem}
             onClick={() => handlePageChange(elem)}
             type="button"

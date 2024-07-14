@@ -18,6 +18,7 @@ function ItemsList({ searchValue }: ItemsListProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postPerPage] = useState<number>(20);
+  const [hasError, setError] = useState<boolean>(false);
   const { results } = itemsListState;
   const indexOfLastPage = currentPage * postPerPage;
   const firstPostIndex = indexOfLastPage - postPerPage;
@@ -71,15 +72,22 @@ function ItemsList({ searchValue }: ItemsListProps) {
     }
 
     if (pageNum) {
-      setCurrentPage(Number(pageNum));
+      if (Number.isNaN(Number(pageNum)) || Number(pageNum) > indexOfLastPage) {
+        setError(true);
+      } else {
+        setCurrentPage(Number(pageNum));
+      }
     } else {
       setCurrentPage(1);
     }
-  }, [searchValue, pageNum]);
+  }, [searchValue, pageNum, indexOfLastPage]);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
+  if (hasError) {
+    throw new Error('Route error, dummy');
+  }
 
   return (
     <>

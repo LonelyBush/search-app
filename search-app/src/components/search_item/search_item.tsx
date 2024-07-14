@@ -26,25 +26,32 @@ function SearchItem() {
     name: '',
   });
   const [loading, setLoading] = useState<boolean>(false);
+  const [hasError, setError] = useState<boolean>(false);
   const navigate = useNavigate();
   const { pageNum, pokeName } = useParams();
   const handleClose = () => {
-    navigate(`/${pageNum}`);
+    navigate(`/search/${pageNum}`);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const response = await getPokes(
-        `https://pokeapi.co/api/v2/pokemon/${pokeName}`,
-      );
-      setLoading(false);
-      setPokeData({ ...response });
+      try {
+        const response = await getPokes(
+          `https://pokeapi.co/api/v2/pokemon/${pokeName}`,
+        );
+        setLoading(false);
+        setPokeData({ ...response });
+      } catch (error) {
+        setError(true);
+      }
     };
     fetchData();
-  }, [pokeName]);
+  }, [pokeName, hasError]);
   const { sprites, stats, types, species, name } = pokeData;
-
+  if (hasError) {
+    throw new Error('Oh, noo, error...');
+  }
   return loading ? (
     <LoadingSpinner />
   ) : (

@@ -11,13 +11,17 @@ import SearchItem from '../components/search_item/search_item';
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<Navigate to="/1" replace />} />
+      <Route path="/" element={<Navigate to="/search/1" replace />} />
       <Route
-        path="/:pageNum"
+        path="/search/:pageNum"
         errorElement={<NotFoundPage />}
         element={<SearchPage />}
       >
-        <Route path="detail/:pokeName" element={<SearchItem />} />
+        <Route
+          path="detail/:pokeName"
+          element={<SearchItem />}
+          errorElement={<NotFoundPage />}
+        />
       </Route>
     </>,
   ),
