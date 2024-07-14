@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import { PaginationProps } from '../../interfaces/props_interfaces';
 
 function Pagination({
@@ -5,21 +6,22 @@ function Pagination({
   postPerPage,
   handlePageChange,
 }: PaginationProps) {
-  const pageNum = [];
+  const pages = [];
   for (let i = 1; i <= Math.ceil(allResults / postPerPage); i += 1) {
-    pageNum.push(i);
+    pages.push(i);
   }
   return (
     <div className="pagination-container">
-      {pageNum.map((elem) => {
+      {pages.map((elem) => {
         return (
-          <button
+          <NavLink
+            to={`/${elem}`}
             key={elem}
             onClick={() => handlePageChange(elem)}
             type="button"
           >
             {elem}
-          </button>
+          </NavLink>
         );
       })}
     </div>

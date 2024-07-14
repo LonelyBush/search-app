@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import ItemsList from '../../components/items_list/items_list';
 import './search-page-style.css';
 import { PokeSearchValue } from '../../interfaces/api_interfaces';
@@ -10,6 +10,8 @@ interface State extends PokeSearchValue {}
 const searchValFromLS = localStorage.getItem('search-value');
 
 function SearchPage() {
+  const navigate = useNavigate();
+  const { pageNum, pokeName } = useParams();
   const [searchPageState, setSearchPageState] = useState<State>({
     searchValue: '',
   });
@@ -18,12 +20,18 @@ function SearchPage() {
     e.preventDefault();
     const searchValue = new FormData(e.currentTarget).get('search-input');
     setSearchPageState({ searchValue: `${searchValue}` });
+    navigate('/1');
   };
 
   const { searchValue } = searchPageState;
   return (
     <div className="main-content-section">
-      <div className="side-bar-section">
+      <div
+        className="side-bar-section"
+        onClick={() => {
+          if (pokeName) navigate(`/${pageNum}`);
+        }}
+      >
         <SearchBar searchValue={searchValFromLS} handleSubmit={handleSubmit} />
         <ItemsList searchValue={searchValue} />
       </div>

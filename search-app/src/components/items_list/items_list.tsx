@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './items_list_style.css';
+import { useParams } from 'react-router-dom';
 import { ItemsListProps } from '../../interfaces/props_interfaces';
 import { getPokes } from '../../api/getAllPokes';
 import { PokeCall, PokeResult } from '../../interfaces/api_interfaces';
@@ -17,12 +18,11 @@ function ItemsList({ searchValue }: ItemsListProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postPerPage] = useState<number>(20);
-  // const { page } = useParams<{ page: string }>();
-  // const navigate = useNavigate();
   const { results } = itemsListState;
   const indexOfLastPage = currentPage * postPerPage;
   const firstPostIndex = indexOfLastPage - postPerPage;
   const currentPosts = results.slice(firstPostIndex, indexOfLastPage);
+  const { pageNum } = useParams();
 
   let itemListComponent;
   if (results.length === 0) {
@@ -69,21 +69,29 @@ function ItemsList({ searchValue }: ItemsListProps) {
     } else {
       setupConnection();
     }
-  }, [searchValue]);
+
+    if (pageNum) {
+      setCurrentPage(Number(pageNum));
+    } else {
+      setCurrentPage(1);
+    }
+  }, [searchValue, pageNum]);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
 
   return (
-    <div className="items-list-container">
-      {loading ? <LoadingSpinner /> : itemListComponent}
+    <>
+      <div className="items-list-container">
+        {loading ? <LoadingSpinner /> : itemListComponent}
+      </div>
       <Pagination
         handlePageChange={handlePageChange}
         allResults={results.length}
         postPerPage={postPerPage}
       />
-    </div>
+    </>
   );
 }
 export default ItemsList;
