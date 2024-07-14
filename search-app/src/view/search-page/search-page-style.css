@@ -1,0 +1,11 @@
+.main-content-section{
+    display: flex;
+    text-align: center;
+}
+
+.side-bar-section{
+    flex-direction: column;
+}
+
+
+

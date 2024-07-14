@@ -1,5 +1,5 @@
 .loader-component{
-    height: 50rem;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,7 +11,7 @@
     border-radius: 100%;
     border: 0.6rem solid black;
     background-image: linear-gradient(
-        red 5rem,
+         #FF4742 5rem,
         white 5rem
     );
     position: relative;

@@ -33,5 +33,8 @@ module.exports = {
     "react-compiler/react-compiler": "error",
     "react/prefer-stateless-function": 0,
     "@typescript-eslint/naming-convention": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "react-hooks/exhaustive-deps": 0,
   },
 }

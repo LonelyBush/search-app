@@ -5,11 +5,9 @@ export interface PokeResult {
 
 export interface PokeSearchValue {
   searchValue: string;
-  hasError: boolean;
 }
 
 export interface PokeCall {
-  loading: boolean;
   results: PokeResult[];
 }
 
@@ -46,6 +44,7 @@ export interface PokeData {
       };
     };
   };
+  name: string;
 }
 
 export interface PokeSpecies {

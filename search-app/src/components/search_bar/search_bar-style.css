@@ -1,9 +1,17 @@
 .search-bar-container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 0.5rem;
-    justify-content: center;
-    align-items: center;
+    padding: 1.4rem;
+    width: fit-content;
+    border: 0.1rem solid rgb(204, 201, 201);
+    background-color: #FFFFFF;
+    text-align: start;
+}
+
+.search-bar-container > h2 {
+font-size: 2rem;
+margin: 0;  
 }
 
 
@@ -12,13 +20,12 @@
     flex-direction: row;
     gap: 0.5rem;
     width: 100%;
-    justify-content: center;
 }
 .input-container{
     display: flex;
     flex-direction: column;
     gap: 0.3rem;  
-    width: 40rem;
+    width: 20rem;
 }
 input[type="text"]{
     position: relative;

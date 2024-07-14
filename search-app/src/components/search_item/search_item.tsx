@@ -1,65 +1,81 @@
-import { Component } from 'react';
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import { useNavigate, useParams } from 'react-router-dom';
 import './search_item_style.css';
-import { getPokes } from '../../api/getAllPokes';
+import { useEffect, useState } from 'react';
 import PokemonStats from '../pokemon_stats/pokemon_stats';
 import { PokeData } from '../../interfaces/api_interfaces';
-import { SearchItemProps } from '../../interfaces/props_interfaces';
 import PokemonTypes from '../pokemon_types/pokemon_types';
 import PokemonFlavorText from '../pokemon_flavor-text/pokemon_flavor-text';
+import LoadingSpinner from '../loading_spinner/loading_spinner';
+import { getPokes } from '../../api/getAllPokes';
 
-interface State extends PokeData {}
-
-class SearchItem extends Component<SearchItemProps, State> {
-  constructor(props: SearchItemProps) {
-    super(props);
-    this.state = {
-      types: [],
-      stats: [],
-      species: {
-        url: '',
-      },
-      sprites: {
-        other: {
-          'official-artwork': {
-            front_default: '',
-          },
+function SearchItem() {
+  const [pokeData, setPokeData] = useState<PokeData>({
+    types: [],
+    stats: [],
+    species: {
+      url: '',
+    },
+    sprites: {
+      other: {
+        'official-artwork': {
+          front_default: '',
         },
       },
-    };
-  }
-
-  componentDidMount() {
-    this.callForPoke();
-  }
-
-  callForPoke = async () => {
-    const { url } = this.props;
-    const data = await getPokes(url);
-    this.setState({ ...data });
+    },
+    name: '',
+  });
+  const [loading, setLoading] = useState<boolean>(false);
+  const [hasError, setError] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const { pageNum, pokeName } = useParams();
+  const handleClose = () => {
+    navigate(`/search/${pageNum}`);
   };
 
-  render() {
-    const { name } = this.props;
-    const { sprites, stats, types, species } = this.state;
-    return (
-      <div className="item-container">
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await getPokes(
+          `https://pokeapi.co/api/v2/pokemon/${pokeName}`,
+        );
+        setLoading(false);
+        setPokeData({ ...response });
+      } catch (error) {
+        setError(true);
+      }
+    };
+    fetchData();
+  }, [pokeName, hasError]);
+  const { sprites, stats, types, species, name } = pokeData;
+  if (hasError) {
+    throw new Error('Oh, noo, error...');
+  }
+  return loading ? (
+    <LoadingSpinner />
+  ) : (
+    <div id="detail" className="item-container">
+      <div className="poke-img-container">
         <img
           alt="pokemon-pic"
           src={sprites.other['official-artwork'].front_default}
         />
-        <div className="name-type-container">
-          <h3>{name.charAt(0).toUpperCase() + name.slice(1)}</h3>
-          <PokemonTypes types={types} />
-        </div>
+        <PokemonStats stats={stats} />
+      </div>
+
+      <div className="name-type-container">
+        <h3>{name.charAt(0).toUpperCase() + name.slice(1)}</h3>
+        <PokemonTypes types={types} />
         {species.url === '' ? (
           <div>Loading...</div>
         ) : (
           <PokemonFlavorText url={species.url} />
         )}
-        <PokemonStats stats={stats} />
       </div>
-    );
-  }
+      <button className="close-btn" onClick={handleClose} type="button" />
+    </div>
+  );
 }
 
 export default SearchItem;

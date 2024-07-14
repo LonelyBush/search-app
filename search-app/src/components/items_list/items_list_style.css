@@ -1,6 +1,16 @@
 .items-list-container{
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.4rem;
+    width: 26.2rem;
+    height: 38.9rem;
+    overflow-y: scroll;
+    border: 0.1rem solid rgb(204, 201, 201);
+    background-color: #FFFFFF;
+}
+
+.items-list-container > .loader-component{
+    transform: scale(0.7);
+    height: 40rem;
 }
