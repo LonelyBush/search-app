@@ -1,2 +1,2 @@
 cd search-app
-npm run test -- --watchAll=false
+npm run test --watchAll=false
