@@ -1,8 +1,8 @@
 import {
-  Navigate,
-  Route,
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
+  Route,
 } from 'react-router-dom';
 import SearchPage from '../view/search-page/search-page';
 import NotFoundPage from '../view/not-found-page/not-found-page';

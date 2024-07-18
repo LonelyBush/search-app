@@ -12,7 +12,7 @@ function Pagination({
     pages.push(i);
   }
   return (
-    <div className="pagination-container">
+    <div data-testid="pagination-container" className="pagination-container">
       {pages.map((elem) => {
         return (
           <NavLink

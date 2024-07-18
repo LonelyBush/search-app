@@ -92,7 +92,7 @@ function ItemsList({ searchValue }: ItemsListProps) {
 
   return (
     <>
-      <div className="items-list-container">
+      <div data-testid="items-list" className="items-list-container">
         {loading ? <LoadingSpinner /> : itemListComponent}
       </div>
       <Pagination

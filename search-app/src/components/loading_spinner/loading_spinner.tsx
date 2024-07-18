@@ -2,7 +2,7 @@ import './loading_spinner_style.css';
 
 function LoadingSpinner() {
   return (
-    <div className="loader-component">
+    <div data-testid="loading-spinner" className="loader-component">
       <div className="pokeball-container">
         <div className="pokeball-btn" />
       </div>

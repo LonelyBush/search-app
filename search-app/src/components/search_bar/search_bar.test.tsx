@@ -6,21 +6,21 @@ import SearchBar from './search_bar';
 import { SearchBarProps } from '../../interfaces/props_interfaces';
 
 describe('SearchBar', () => {
-  it('Should submit correctly', async () => {
-    const user = userEvent.setup();
+  it('Should submit query correctly', async () => {
+    const mockType = 'Pikachu';
     const props: SearchBarProps = {
-      handleSubmit: vi.fn(),
-      searchValue: '',
+      handleSubmit: vi.fn((e) => e.preventDefault()),
+      searchValue: null,
     };
-    render(
+    const { getByRole } = render(
       <SearchBar
         handleSubmit={props.handleSubmit}
         searchValue={props.searchValue}
       />,
     );
-    await user.type(screen.getByRole('textbox'), 'Pikachu');
-    await user.click(screen.getByRole('button'));
-    expect(screen.getByRole('button').innerHTML).toBe('Search');
+    await userEvent.type(getByRole('textbox'), mockType);
+    await userEvent.click(getByRole('button', { name: 'Search' }));
+    expect(props.handleSubmit).toHaveBeenCalled();
   });
   it('Should set focus correctly', async () => {
     const user = userEvent.setup();

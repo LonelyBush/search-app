@@ -49,9 +49,6 @@ function SearchItem() {
     fetchData();
   }, [pokeName, hasError]);
   const { sprites, stats, types, species, name } = pokeData;
-  if (hasError) {
-    throw new Error('Oh, noo, error...');
-  }
   return loading ? (
     <LoadingSpinner />
   ) : (
@@ -73,7 +70,12 @@ function SearchItem() {
           <PokemonFlavorText url={species.url} />
         )}
       </div>
-      <button className="close-btn" onClick={handleClose} type="button" />
+      <button
+        data-testid="close-btn"
+        className="close-btn"
+        onClick={handleClose}
+        type="button"
+      />
     </div>
   );
 }
