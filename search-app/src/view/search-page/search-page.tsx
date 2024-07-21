@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import ItemsList from '../../components/items_list/items_list';
 import './search-page-style.css';
 import { PokeSearchValue } from '../../interfaces/api_interfaces';
@@ -11,7 +11,6 @@ interface State extends PokeSearchValue {}
 function SearchPage() {
   const { searchQueryFromLS } = useSearchQuery();
   const navigate = useNavigate();
-  const { pageNum, pokeName } = useParams();
   const [searchPageState, setSearchPageState] = useState<State>({
     searchValue: '',
   });
@@ -26,12 +25,7 @@ function SearchPage() {
   const { searchValue } = searchPageState;
   return (
     <div className="main-content-section">
-      <div
-        className="side-bar-section"
-        onClick={() => {
-          if (pokeName) navigate(`/search/${pageNum}`);
-        }}
-      >
+      <div className="side-bar-section">
         <SearchBar
           searchValue={searchQueryFromLS}
           handleSubmit={handleSubmit}
