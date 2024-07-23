@@ -39,13 +39,10 @@ function ItemsList({ searchValue }: ItemsListProps) {
 
   if (data !== undefined) {
     const { results } = data as PokeCall;
-    const getFilteredResults =
-      searchQueryFromLS.length > 0
-        ? getSearchQueryData(
-            searchValue.length > 0 ? searchValue : searchQueryFromLS,
-            results,
-          )
-        : results;
+    const getFilteredResults = getSearchQueryData(
+      searchValue.length > 0 ? searchValue : searchQueryFromLS,
+      results,
+    );
     resultsLength = getFilteredResults.length;
     indexOfLastPage = currentPage * postPerPage;
     firstPostIndex = indexOfLastPage - postPerPage;
@@ -58,7 +55,6 @@ function ItemsList({ searchValue }: ItemsListProps) {
       });
     }
   }
-
   useEffect(() => {
     if (pageNum) {
       if (Number.isNaN(Number(pageNum)) || Number(pageNum) > indexOfLastPage) {

@@ -7,6 +7,7 @@ import PokemonTypes from '../pokemon_types/pokemon_types';
 import PokemonFlavorText from '../pokemon_flavor-text/pokemon_flavor-text';
 import LoadingSpinner from '../loading_spinner/loading_spinner';
 import { useGetPokemonByNameQuery } from '../../api/getPokemons';
+import CloseBtn from '../ui/close_btn/close_btn';
 
 function SearchItem() {
   const navigate = useNavigate();
@@ -38,12 +39,7 @@ function SearchItem() {
           <PokemonFlavorText name={data.name} />
         )}
       </div>
-      <button
-        data-testid="close-btn"
-        className="close-btn"
-        onClick={handleClose}
-        type="button"
-      />
+      <CloseBtn onClick={handleClose} />
     </div>
   ) : null;
 }

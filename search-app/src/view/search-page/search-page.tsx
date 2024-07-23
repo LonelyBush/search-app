@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import ItemsList from '../../components/items_list/items_list';
 import './search-page-style.css';
@@ -22,6 +22,13 @@ function SearchPage() {
     navigate('/search/1');
   };
 
+  useEffect(() => {
+    if (searchQueryFromLS.length === 0) {
+      setSearchPageState({ searchValue: '' });
+    } else {
+      setSearchPageState({ searchValue: searchQueryFromLS });
+    }
+  }, [searchQueryFromLS]);
   const { searchValue } = searchPageState;
   return (
     <div className="main-content-section">
