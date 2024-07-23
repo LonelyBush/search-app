@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import Pagination from './pagination-items-list';
 import { PaginationProps } from '../../interfaces/props_interfaces';
+import ProviderWrapper from '../../utils/provider_wrapper';
 
 describe('Pagination', () => {
   it('Should render without breaking 15 elements', () => {
@@ -21,6 +22,7 @@ describe('Pagination', () => {
         />
         ,
       </MemoryRouter>,
+      { wrapper: ProviderWrapper },
     );
     expect(getByTestId('pagination-container').children.length).toEqual(15);
   });
@@ -40,6 +42,7 @@ describe('Pagination', () => {
         />
         ,
       </MemoryRouter>,
+      { wrapper: ProviderWrapper },
     );
     userEvent.click(getByRole('link'));
     expect(getByRole('link').classList.contains('active')).toBe(true);

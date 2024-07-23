@@ -14,7 +14,7 @@ export interface PokemonTypesProps {
 }
 
 export interface PokemonFlavorProps {
-  url: string;
+  name: string;
 }
 
 export interface SearchBarProps {
@@ -30,5 +30,4 @@ export interface PaginationProps {
 
 export interface SearchRowComponentProps {
   name: string;
-  url: string;
 }

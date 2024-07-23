@@ -1,30 +1,22 @@
-import { useEffect, useState } from 'react';
 import { PokemonFlavorProps } from '../../interfaces/props_interfaces';
+import { useGetPokemonBySpeciesByNumQuery } from '../../api/getPokemons';
 import { PokeSpecies } from '../../interfaces/api_interfaces';
-import { getPokes } from '../../api/getAllPokes';
 
-function PokemonFlavorText({ url }: PokemonFlavorProps) {
-  const [flavorEntries, setFlavorEntries] = useState<PokeSpecies>({
-    flavor_text_entries: [],
-  });
-
-  const { flavor_text_entries } = flavorEntries;
-  const firstEn = flavor_text_entries.find(
-    (elem) => elem.language.name === 'en',
-  );
-  useEffect(() => {
-    const componentDidMount = async () => {
-      const data = await getPokes(`${url}`);
-      setFlavorEntries({ ...data });
-    };
-    componentDidMount();
-  }, [url]);
-
+function PokemonFlavorText({ name }: PokemonFlavorProps) {
+  const { data } = useGetPokemonBySpeciesByNumQuery(name);
+  let flavorTextEn;
+  if (data !== undefined) {
+    const { flavor_text_entries } = data as PokeSpecies;
+    flavorTextEn =
+      flavor_text_entries !== undefined
+        ? flavor_text_entries
+            .find((elem) => elem.language.name === 'en')
+            ?.flavor_text.replace('\f', ' ')
+        : null;
+  }
   return (
     <div className="flavor-text">
-      {firstEn !== undefined
-        ? firstEn.flavor_text.replace('\f', ' ')
-        : 'Sorry :c No text provided'}
+      {flavorTextEn !== null ? flavorTextEn : 'Sorry :c No text provided'}
     </div>
   );
 }

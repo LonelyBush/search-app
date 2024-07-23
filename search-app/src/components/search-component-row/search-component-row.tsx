@@ -1,24 +1,11 @@
-import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { getPokes } from '../../api/getAllPokes';
 import { SearchRowComponentProps } from '../../interfaces/props_interfaces';
 import './search-component-row-style.css';
 import pokeballStatic from '../../../assets/pics/pokeball.png';
+import { useGetPokemonByNameQuery } from '../../api/getPokemons';
 
-function SearchComponentRow({ url, name }: SearchRowComponentProps) {
-  const [getImgUrl, setGetImgUrl] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const callForPoke = async () => {
-      setLoading(true);
-      const response = await getPokes(url);
-      const getImg = response.sprites.front_default;
-      setLoading(false);
-      setGetImgUrl(getImg);
-    };
-    callForPoke();
-  }, [url]);
+function SearchComponentRow({ name }: SearchRowComponentProps) {
+  const { data, isLoading } = useGetPokemonByNameQuery(name);
 
   return (
     <div className="search-row-container">
@@ -28,7 +15,7 @@ function SearchComponentRow({ url, name }: SearchRowComponentProps) {
           isActive ? 'search-row-content active' : 'search-row-content'
         }
       >
-        {loading ? (
+        {isLoading ? (
           <img
             className="loading-prop-img"
             src={pokeballStatic}
@@ -37,7 +24,7 @@ function SearchComponentRow({ url, name }: SearchRowComponentProps) {
         ) : (
           <img
             className="small-poke-img"
-            src={getImgUrl}
+            src={data ? data.sprites.front_default : null}
             alt="small-poke-img"
           />
         )}
