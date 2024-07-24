@@ -11,11 +11,13 @@ describe('SearchBar', () => {
     const props: SearchBarProps = {
       handleSubmit: vi.fn((e) => e.preventDefault()),
       searchValue: null,
+      setTheme: vi.fn(),
     };
     const { getByRole } = render(
       <SearchBar
         handleSubmit={props.handleSubmit}
         searchValue={props.searchValue}
+        setTheme={props.setTheme}
       />,
     );
     await userEvent.type(getByRole('textbox'), mockType);
@@ -27,11 +29,13 @@ describe('SearchBar', () => {
     const props: SearchBarProps = {
       handleSubmit: vi.fn(),
       searchValue: '',
+      setTheme: vi.fn(),
     };
     render(
       <SearchBar
         handleSubmit={props.handleSubmit}
         searchValue={props.searchValue}
+        setTheme={props.setTheme}
       />,
     );
     await user.click(screen.getByRole('textbox'));

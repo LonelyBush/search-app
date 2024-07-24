@@ -27,3 +27,7 @@
   .close-btn:after {
     transform: rotate(-45deg);
   }
+
+  .close-btn.dark::before, .close-btn.dark:after {
+    background-color: #464f65;
+  }

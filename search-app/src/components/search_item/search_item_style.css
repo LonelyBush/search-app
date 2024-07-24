@@ -12,6 +12,13 @@
 
 }
 
+.item-container.dark {
+    color: #FFFFFF;
+    border: 0.1rem solid #1e272e;
+    background-color: #2C3A47;
+    box-shadow: 0 0.1rem 0.2rem #525968;
+}
+
 .poke-img-container{
     display: flex;
     flex-direction: column;

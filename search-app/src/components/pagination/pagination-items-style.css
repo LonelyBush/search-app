@@ -11,6 +11,12 @@
 
 }
 
+.pagination-container.dark {
+    color: #FFFFFF;
+    border: 0.1rem solid #1e272e;
+    background-color: #2C3A47;
+}
+
 .pagination-button{
     text-decoration: none;
     color: inherit;
@@ -41,4 +47,18 @@
     box-shadow: 0 0.1rem 0.2rem #e1e1e1;
     cursor: pointer;
     color: #FFFFFF;
+}
+
+.pagination-button.dark{
+    color: #000;
+    background-color: #b6c0cf;
+    border: 1px solid #b6c0cf;
+    box-shadow: 0 0.1rem 0.2rem #525968;
+}
+
+.pagination-button.dark.active{
+    color: #FFFFFF;
+    background-color: #464f65;
+    border: 1px solid #464f65;
+    box-shadow: 0 0.1rem 0.2rem #525968;
 }

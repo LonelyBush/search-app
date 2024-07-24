@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './items_list_style.css';
 import { useParams } from 'react-router-dom';
 import { ItemsListProps } from '../../interfaces/props_interfaces';
@@ -9,12 +9,14 @@ import Pagination from '../pagination/pagination-items-list';
 import SearchComponentRow from '../search-component-row/search-component-row';
 import { useGetAllPokemonQuery } from '../../api/getPokemons';
 import useSearchQuery from '../../hooks/useSearchQuery-hook';
+import ThemeContext from '../../context/theme_context';
 
 function ItemsList({ searchValue }: ItemsListProps) {
   const { data, isLoading } = useGetAllPokemonQuery('300', {
     refetchOnMountOrArgChange: true,
   });
   const { searchQueryFromLS, setSearchQueryToLS } = useSearchQuery();
+  const theme = useContext(ThemeContext);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postPerPage] = useState<number>(20);
   const [hasError, setError] = useState<boolean>(false);
@@ -76,7 +78,7 @@ function ItemsList({ searchValue }: ItemsListProps) {
 
   return (
     <>
-      <div data-testid="items-list" className="items-list-container">
+      <div data-testid="items-list" className={`items-list-container ${theme}`}>
         {isLoading ? <LoadingSpinner /> : itemListComponent}
       </div>
       <Pagination

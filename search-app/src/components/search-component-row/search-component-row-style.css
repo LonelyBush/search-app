@@ -38,6 +38,18 @@
     cursor: pointer;
     color: #FFFFFF;
 }
+
+.search-row-content.dark {
+    background-color: #b6c0cf;
+    border: 1px solid #b6c0cf;
+    box-shadow: 0 0.1rem 0.2rem #525968;
+}
+
+.search-row-content.dark.active {
+    background-color: #464f65;
+    border: 1px solid #464f65;
+    box-shadow: 0 0.1rem 0.2rem #525968;
+}
 .search-row-container > p {
     margin: 0;
 }
