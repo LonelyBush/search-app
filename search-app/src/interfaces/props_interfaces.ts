@@ -32,4 +32,5 @@ export interface PaginationProps {
 
 export interface SearchRowComponentProps {
   name: string;
+  id: string;
 }

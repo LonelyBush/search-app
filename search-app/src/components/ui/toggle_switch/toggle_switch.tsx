@@ -9,7 +9,12 @@ function ToggleSwitch({
   return (
     <div className="toggle-switch-container">
       <label htmlFor="toggle-switch" className="switch">
-        <input onChange={onChange} id="toggle-switch" type="checkbox" />
+        <input
+          onChange={onChange}
+          id="toggle-switch"
+          type="checkbox"
+          className="switch-input"
+        />
         <span className="slider round" />
       </label>
     </div>

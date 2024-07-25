@@ -1,13 +1,19 @@
 import { NavLink } from 'react-router-dom';
-import { useContext } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { SearchRowComponentProps } from '../../interfaces/props_interfaces';
 import './search-component-row-style.css';
 import pokeballStatic from '../../../assets/pics/pokeball.png';
 import { useGetPokemonByNameQuery } from '../../api/getPokemons';
 import ThemeContext from '../../context/theme_context';
+import CheckBox from '../ui/check_box/check_box';
 
-function SearchComponentRow({ name }: SearchRowComponentProps) {
+function SearchComponentRow({ name, id }: SearchRowComponentProps) {
   const { data, isLoading } = useGetPokemonByNameQuery(name);
+  const [check, setCheck] = useState<boolean>(false);
+  const HandleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(check);
+    setCheck(e.currentTarget.checked);
+  };
   const theme = useContext(ThemeContext);
   return (
     <div className="search-row-container">
@@ -33,8 +39,8 @@ function SearchComponentRow({ name }: SearchRowComponentProps) {
           />
         )}
         <p>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
-        <span>&#9658;</span>
       </NavLink>
+      <CheckBox name={name} id={`${name}-${id}`} onChange={HandleOnChange} />
     </div>
   );
 }

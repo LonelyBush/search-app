@@ -52,8 +52,14 @@ function ItemsList({ searchValue }: ItemsListProps) {
     if (currentPosts.length === 0) {
       itemListComponent = <EmptySearchResult />;
     } else {
-      itemListComponent = currentPosts.map((elem) => {
-        return <SearchComponentRow key={elem.url} name={elem.name} />;
+      itemListComponent = currentPosts.map((elem, index) => {
+        return (
+          <SearchComponentRow
+            key={elem.url}
+            id={index.toString()}
+            name={elem.name}
+          />
+        );
       });
     }
   }

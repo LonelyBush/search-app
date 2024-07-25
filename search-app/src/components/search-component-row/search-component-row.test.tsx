@@ -9,13 +9,14 @@ import ProviderWrapper from '../../utils/provider_wrapper';
 
 const defaultData = {
   name: 'charizard',
+  id: '4',
 };
 
 describe('Renders row with charizard without breaking', async () => {
   it('Renders without breaking', async () => {
     render(
       <MemoryRouter initialEntries={['/search/1']}>
-        <SearchComponentRow name={defaultData.name} />,
+        <SearchComponentRow name={defaultData.name} id={defaultData.id} />,
       </MemoryRouter>,
       { wrapper: ProviderWrapper },
     );
@@ -26,7 +27,7 @@ describe('Renders row with charizard without breaking', async () => {
   it('Check for image loader component', () => {
     const { getByAltText } = render(
       <MemoryRouter initialEntries={['/search/1']}>
-        <SearchComponentRow name={defaultData.name} />,
+        <SearchComponentRow name={defaultData.name} id={defaultData.id} />,
       </MemoryRouter>,
       { wrapper: ProviderWrapper },
     );
@@ -36,7 +37,7 @@ describe('Renders row with charizard without breaking', async () => {
   it('Renders image from API', async () => {
     const { getByAltText } = render(
       <MemoryRouter initialEntries={['/search/1']}>
-        <SearchComponentRow name={defaultData.name} />,
+        <SearchComponentRow name={defaultData.name} id={defaultData.id} />,
       </MemoryRouter>,
       { wrapper: ProviderWrapper },
     );
@@ -49,7 +50,7 @@ describe('Renders row with charizard without breaking', async () => {
   it('Open details page', async () => {
     render(
       <MemoryRouter initialEntries={['/search/1']}>
-        <SearchComponentRow name={defaultData.name} />,
+        <SearchComponentRow name={defaultData.name} id={defaultData.id} />,
       </MemoryRouter>,
       { wrapper: ProviderWrapper },
     );
@@ -64,7 +65,7 @@ describe('Renders row with charizard without breaking', async () => {
   it('Check for active NavLink', async () => {
     render(
       <MemoryRouter initialEntries={['/search/1']}>
-        <SearchComponentRow name={defaultData.name} />,
+        <SearchComponentRow name={defaultData.name} id={defaultData.id} />,
       </MemoryRouter>,
       { wrapper: ProviderWrapper },
     );
