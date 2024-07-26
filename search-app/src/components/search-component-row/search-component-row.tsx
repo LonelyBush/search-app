@@ -17,13 +17,18 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
   const [checked, setChecked] = useState<boolean>(false);
   const HandleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setChecked(!checked);
+    const createJson = {
+      id,
+      name,
+      height: data.height,
+      experience: data.base_experience,
+    };
     dispatch(
       e.currentTarget.checked
-        ? addPokemon({ ...data })
-        : removePokemon({ ...data }),
+        ? addPokemon(createJson)
+        : removePokemon(createJson),
     );
   };
-  console.log(store);
   useEffect(() => {
     setChecked(store.find((elem) => elem.name === name) !== undefined);
   }, [store]);
@@ -55,6 +60,7 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
         <p>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
       </NavLink>
       <CheckBox
+        theme={theme}
         checked={checked}
         name={name}
         id={`${name}-${id}`}

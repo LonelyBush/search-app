@@ -55,3 +55,7 @@
     border-width: 0 0.2rem 0.2rem 0;
     transform: rotate(45deg);
   }
+  .label-wrapper.dark .checkbox[type="checkbox"]:checked ~ .checkmark {
+    background-color: #464f65;
+  }
+  

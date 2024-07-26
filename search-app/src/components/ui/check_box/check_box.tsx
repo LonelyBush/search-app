@@ -6,7 +6,9 @@ function CheckBox({
   name,
   onChange,
   checked,
+  theme,
 }: {
+  theme: string;
   checked: boolean;
   id: string;
   name: string;
@@ -14,7 +16,7 @@ function CheckBox({
 }) {
   return (
     <div className="check-box-container">
-      <label htmlFor={id} className="label-wrapper">
+      <label htmlFor={id} className={`label-wrapper ${theme}`}>
         <input
           name={name}
           onChange={onChange}

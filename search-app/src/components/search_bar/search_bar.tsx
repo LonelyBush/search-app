@@ -10,6 +10,7 @@ import useSearchQuery from '../../hooks/useSearchQuery-hook';
 import ToggleSwitch from '../ui/toggle_switch/toggle_switch';
 import ThemeContext from '../../context/theme_context';
 import { RootState } from '../../store/store';
+import DownloadCSV from '../../csv/download_csv';
 
 function SearchBar({ handleSubmit, searchValue, setTheme }: SearchBarProps) {
   const posts = useSelector((state: RootState) => state.pokeStore);
@@ -27,7 +28,6 @@ function SearchBar({ handleSubmit, searchValue, setTheme }: SearchBarProps) {
   const handleClearAll = () => {
     dispatch(removeAllPokemons());
   };
-
   useEffect(() => {
     setQueryState(searchValue!);
   }, [searchValue]);
@@ -76,9 +76,11 @@ function SearchBar({ handleSubmit, searchValue, setTheme }: SearchBarProps) {
           >
             Clear All
           </button>
-          <button className={`submit-btn ${theme}`} type="button">
-            Download
-          </button>
+          <DownloadCSV
+            className={`submit-btn ${theme}`}
+            data={posts}
+            itemsCount={posts.length.toString()}
+          />
         </div>
       ) : null}
     </div>
