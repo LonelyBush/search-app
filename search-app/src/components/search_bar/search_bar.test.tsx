@@ -4,6 +4,7 @@ import '@testing-library/jest-dom';
 import { describe, expect, it, vi } from 'vitest';
 import SearchBar from './search_bar';
 import { SearchBarProps } from '../../interfaces/props_interfaces';
+import ProviderWrapper from '../../utils/provider_wrapper';
 
 describe('SearchBar', () => {
   it('Should submit query correctly', async () => {
@@ -19,6 +20,7 @@ describe('SearchBar', () => {
         searchValue={props.searchValue}
         setTheme={props.setTheme}
       />,
+      { wrapper: ProviderWrapper },
     );
     await userEvent.type(getByRole('textbox'), mockType);
     await userEvent.click(getByRole('button', { name: 'Search' }));
@@ -37,6 +39,7 @@ describe('SearchBar', () => {
         searchValue={props.searchValue}
         setTheme={props.setTheme}
       />,
+      { wrapper: ProviderWrapper },
     );
     await user.click(screen.getByRole('textbox'));
     expect(screen.getByRole('textbox').getAttribute('data-focused')).toBe(

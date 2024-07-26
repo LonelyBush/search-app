@@ -123,3 +123,13 @@ input[type="text"]:focus {
   background-color: #b6c0cf;
   color: #464f65;
 }
+
+.counter-section{
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.items-counter{
+    font-size: 1.4rem;
+}

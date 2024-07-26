@@ -5,20 +5,23 @@ function CheckBox({
   id,
   name,
   onChange,
+  checked,
 }: {
+  checked: boolean;
   id: string;
   name: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
     <div className="check-box-container">
-      <label htmlFor={name} className="label-wrapper">
+      <label htmlFor={id} className="label-wrapper">
         <input
           name={name}
           onChange={onChange}
           id={id}
           type="checkbox"
           className="checkbox"
+          checked={checked}
         />
         <span className="checkmark" />
       </label>

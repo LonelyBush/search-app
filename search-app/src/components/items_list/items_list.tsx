@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
-import './items_list_style.css';
 import { useParams } from 'react-router-dom';
+import './items_list_style.css';
 import { ItemsListProps } from '../../interfaces/props_interfaces';
 import { PokeCall, PokeResult } from '../../interfaces/api_interfaces';
 import LoadingSpinner from '../loading_spinner/loading_spinner';
@@ -38,7 +38,6 @@ function ItemsList({ searchValue }: ItemsListProps) {
       elem.name.includes(changedQuery),
     );
   };
-
   if (data !== undefined) {
     const { results } = data as PokeCall;
     const getFilteredResults = getSearchQueryData(
