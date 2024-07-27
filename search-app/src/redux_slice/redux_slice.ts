@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { PokeData } from '../interfaces/api_interfaces';
+import PayloadInterface from '../interfaces/payload_interface';
 
-const initialState: PokeData[] = [];
+const initialState: PayloadInterface[] = [];
 
 const postSlice = createSlice({
   name: 'pokeStore',

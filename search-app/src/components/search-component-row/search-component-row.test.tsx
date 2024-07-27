@@ -74,4 +74,16 @@ describe('Renders row with charizard without breaking', async () => {
       expect(screen.getByRole('link').classList.contains('active')).toBe(true);
     });
   });
+  it('Check for checkbox change handler', async () => {
+    const { getByRole } = render(
+      <MemoryRouter initialEntries={['/search/1']}>
+        <SearchComponentRow name={defaultData.name} id={defaultData.id} />,
+      </MemoryRouter>,
+      { wrapper: ProviderWrapper },
+    );
+    await waitFor(() => {
+      userEvent.click(getByRole('checkbox'));
+      expect(getByRole('checkbox')).toBeChecked();
+    });
+  });
 });

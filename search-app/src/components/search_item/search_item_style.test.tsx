@@ -31,4 +31,17 @@ describe('SearchItem', () => {
       expect(getByRole('button')).toBeInTheDocument();
     });
   });
+  it('Should load data correctly', async () => {
+    const { getByText } = render(
+      <MemoryRouter initialEntries={['/details/charizard']}>
+        <Routes>
+          <Route path="/details/:pokeName" element={<SearchItem />} />
+        </Routes>
+      </MemoryRouter>,
+      { wrapper: ProviderWrapper },
+    );
+    await waitFor(() => {
+      expect(getByText('Charizard')).toBeInTheDocument();
+    });
+  });
 });

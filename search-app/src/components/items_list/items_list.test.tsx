@@ -18,4 +18,20 @@ describe('ItemsList', () => {
       expect(getByTestId('items-list').children.length).toEqual(20);
     });
   });
+
+  it('Should render empty result page', async () => {
+    const mockSearchVal = 'Wesjel';
+    const { getByText } = render(
+      <MemoryRouter initialEntries={['/search/1']}>
+        <ItemsList searchValue={mockSearchVal} />
+      </MemoryRouter>,
+      { wrapper: ProviderWrapper },
+    );
+
+    await waitFor(() => {
+      expect(
+        getByText('Ohh no... there is no such pokemon according your query.'),
+      ).toBeDefined();
+    });
+  });
 });
