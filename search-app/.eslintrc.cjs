@@ -9,7 +9,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'vite.config.d.ts','vite.config.js' ],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'vite.config.d.ts','vite.config.js', 'next.config.js' ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
