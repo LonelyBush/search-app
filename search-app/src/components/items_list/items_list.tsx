@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './items_list_style.css';
+import styles from './items_list_style.module.css';
 import { ItemsListProps } from '../../interfaces/props_interfaces';
 import { PokeCall, PokeResult } from '../../interfaces/api_interfaces';
 import LoadingSpinner from '../loading_spinner/loading_spinner';
@@ -83,7 +83,10 @@ function ItemsList({ searchValue }: ItemsListProps) {
 
   return (
     <>
-      <div data-testid="items-list" className={`items-list-container ${theme}`}>
+      <div
+        data-testid="items-list"
+        className={`${styles[`items-list-container`]} ${styles[`${theme}`]}`}
+      >
         {isLoading ? <LoadingSpinner /> : itemListComponent}
       </div>
       <Pagination

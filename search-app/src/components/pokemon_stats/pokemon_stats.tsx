@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { StatsContainerProps } from '../../interfaces/props_interfaces';
 import { darkIconCollection, iconCollection } from './icon_collection-const';
-import './pokemon_stats_style.css';
+import styles from './pokemon_stats_style.module.css';
 import ThemeContext from '../../context/theme_context';
 
 function PokemonStats({ stats }: StatsContainerProps) {
@@ -13,12 +13,12 @@ function PokemonStats({ stats }: StatsContainerProps) {
     );
   });
   return (
-    <div className="stats-container">
+    <div className={styles['stats-container']}>
       {getOnlyMainStats.map((elem) => {
         return (
-          <div key={elem.stat.name} className="stat-block">
+          <div key={elem.stat.name} className={styles['stat-block']}>
             <img
-              className="stat-icon"
+              className={styles['stat-icon']}
               src={
                 theme === 'dark'
                   ? darkIconCollection[elem.stat.name]

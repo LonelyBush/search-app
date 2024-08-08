@@ -15,7 +15,7 @@ function PokemonFlavorText({ name }: PokemonFlavorProps) {
         : null;
   }
   return (
-    <div className="flavor-text">
+    <div>
       {flavorTextEn !== null ? flavorTextEn : 'Sorry :c No text provided'}
     </div>
   );

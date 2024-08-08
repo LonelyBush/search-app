@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import ItemsList from '../../components/items_list/items_list';
-import './search-page-style.css';
+import styles from './search-page-style.module.css';
 import { PokeSearchValue } from '../../interfaces/api_interfaces';
 import SearchBar from '../../components/search_bar/search_bar';
 import useSearchQuery from '../../hooks/useSearchQuery-hook';
@@ -33,8 +33,10 @@ function SearchPage() {
   const { searchValue } = searchPageState;
   return (
     <ThemeContext.Provider value={theme}>
-      <div className={`main-content-section ${theme}`}>
-        <div className="side-bar-section">
+      <div
+        className={`${styles[`main-content-section`]} ${styles[`${theme}`]}`}
+      >
+        <div className={styles['side-bar-section']}>
           <SearchBar
             searchValue={searchQueryFromLS}
             handleSubmit={handleSubmit}

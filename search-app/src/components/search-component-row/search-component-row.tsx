@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { addPokemon, removePokemon } from '../../redux_slice/redux_slice';
 import { SearchRowComponentProps } from '../../interfaces/props_interfaces';
-import './search-component-row-style.css';
+import styles from './search-component-row-style.module.css';
 import pokeballStatic from '../../../assets/pics/pokeball.png';
 import { useGetPokemonByNameQuery } from '../../api/getPokemons';
 import ThemeContext from '../../context/theme_context';
@@ -35,24 +35,24 @@ function SearchComponentRow({ name, id }: SearchRowComponentProps) {
 
   const theme = useContext(ThemeContext);
   return (
-    <div className="search-row-container">
+    <div className={styles['search-row-container']}>
       <NavLink
         to={`detail/${name}`}
         className={({ isActive }) =>
           isActive
-            ? `search-row-content ${theme} active`
-            : `search-row-content ${theme}`
+            ? `${styles[`search-row-content`]} ${styles[`${theme}`]} ${styles.active}`
+            : `${styles[`search-row-content`]} ${styles[`${theme}`]}`
         }
       >
         {isLoading ? (
           <img
-            className="loading-prop-img"
+            className={styles['loading-prop-img']}
             src={pokeballStatic}
             alt="pokeball"
           />
         ) : (
           <img
-            className="small-poke-img"
+            className={styles['small-poke-img']}
             src={data ? data.sprites.front_default : null}
             alt="small-poke-img"
           />

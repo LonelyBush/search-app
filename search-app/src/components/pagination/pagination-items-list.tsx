@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { PaginationProps } from '../../interfaces/props_interfaces';
-import './pagination-items-style.css';
+import styles from './pagination-items-style.module.css';
 import ThemeContext from '../../context/theme_context';
 
 function Pagination({
@@ -17,15 +17,15 @@ function Pagination({
   return (
     <div
       data-testid="pagination-container"
-      className={`pagination-container ${theme}`}
+      className={`${styles[`pagination-container`]} ${styles[`${theme}`]}`}
     >
       {pages.map((elem) => {
         return (
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? `pagination-button ${theme} active`
-                : `pagination-button ${theme}`
+                ? `${styles[`pagination-button`]} ${styles[`${theme}`]} ${styles.active}`
+                : `${styles[`pagination-button`]} ${styles[`${theme}`]}`
             }
             to={`/search/${elem}`}
             key={elem}
